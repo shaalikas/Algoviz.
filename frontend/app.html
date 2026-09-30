@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>AlgoViz | Analyze</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="assets/favicon.svg"><link rel="stylesheet" href="css/app.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script></head><body>
+<header>
+ <a class="logo" href="index.html" title="Back to front page"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#2563eb" stroke-width="2.5"><circle cx="17" cy="7" r="4"/><circle cx="7" cy="26" r="4"/><circle cx="27" cy="26" r="4"/><path d="M15 10l-6 13M19 10l6 13M11 26h12"/></svg><div><h1>AlgoViz</h1><small>Code-to-Diagram Architecture Visualizer</small></div></a>
+ <nav id="nav"><button data-p="analyze" class="on">Analyze</button><button data-p="history">History</button><button data-p="dash">Dashboard</button><button data-p="admin" id="navAdmin" hidden>Admin</button></nav>
+ <span class="sp"></span><button class="ic" id="theme" aria-label="Toggle theme">◐</button><span id="who"></span><button class="btn sm" id="authBtn">Log in</button>
+</header>
+<div class="banner" id="banner"><span>Demo mode: pick a sample or analyze a repo. Sign up to save history.</span><button class="btn sm" onclick="openAuth('reg')">Sign up</button></div>
+<main>
+<section class="page on" id="p-analyze"><div class="grid"><div>
+ <div class="card"><h3>Input repository</h3>
+  <div class="seg" id="src"><button class="on" data-s="url">GitHub URL</button><button data-s="zip">Upload ZIP</button></div>
+  <div id="urlBox"><input type="text" id="url" value="https://github.com/axios/axios" aria-label="GitHub URL"><small style="color:var(--mu)">e.g. https://github.com/user/repo</small></div>
+  <div id="zipBox" hidden><div class="drop" id="drop">Drop a .zip here or click to choose<input type="file" id="zf" accept=".zip" hidden></div></div>
+  <button class="btn" style="width:100%;margin-top:12px" id="go">Analyze repository</button>
+  <div style="margin-top:12px;color:var(--mu)">Samples: <button class="btn sec sm" data-smp="axios">axios</button> <button class="btn sec sm" data-smp="flask">flask</button> <button class="btn sec sm" data-smp="gin">gin</button></div>
+ </div>
+ <div class="card"><h3>Analysis options</h3><label class="ck"><input type="checkbox" checked> Include external dependencies</label><label class="ck"><input type="checkbox" checked> Detect risks &amp; security issues</label><label class="ck"><input type="checkbox" checked> Generate AI summary</label></div>
+ <div class="card" id="info"><h3>Repository info</h3><div class="state">No repository analyzed yet.</div></div>
+ <div class="card" id="riskCard" hidden><h3>Risk analysis (overall)</h3><div id="riskSum"></div><div id="riskList"></div></div>
+</div>
+<div class="card"><h3>Output view</h3>
+ <div class="err" id="err"></div>
+ <div class="tabs" id="otabs"><button data-t="overview" class="on">Architecture Overview</button><button data-t="diagram">System Architecture</button><button data-t="lifecycle">Session Lifecycle</button><button data-t="resources">Resource Flow</button><button data-t="tree">Tree</button><button data-t="insights">Insights</button><button data-t="ai">AI Summary</button></div>
+ <div id="load" class="state" hidden><div class="bar"><i></i></div><span id="lmsg">Fetching repository…</span></div>
+ <div id="empty" class="state">Enter a GitHub URL or pick a sample, then select Analyze repository.</div>
+ <div id="out" hidden>
+  <div class="t" id="t-overview"><div id="architectureOverview"></div></div>
+  <div class="t" id="t-diagram" hidden><div class="tools"><b>System architecture diagram</b><span class="sp"></span><div class="seg" style="margin:0" id="dir"><button data-d="TD" class="on">TD</button><button data-d="LR">LR</button></div><button class="btn sec sm" id="dSvg">Download SVG</button><button class="btn sec sm" id="dMmd">Download .mmd</button></div><div id="dg"></div></div>
+  <div class="t" id="t-lifecycle" hidden><div id="sessionLifecycle"></div></div>
+  <div class="t" id="t-resources" hidden><div id="resourceFlow"></div></div>
+  <div class="t" id="t-tree" hidden><div class="tools"><b>File tree</b><span class="sp"></span><button class="btn sec sm" id="cpTree">Copy as text</button></div><div class="tree" id="tree"></div></div>
+  <div class="t" id="t-insights" hidden><div class="two"><div><h3>Hotspots</h3><div id="hot"></div></div><div><h3>Dependency cycles</h3><div id="cyc"></div><h3 style="margin-top:14px">Layer counts</h3><div id="lc"></div></div></div></div>
+  <div class="t" id="t-ai" hidden><div id="aiTx"></div></div>
+ </div>
+</div></div></section>
+
+<section class="page" id="p-history"><div class="card"><div class="tools"><h3 style="margin:0">History</h3><span class="sp"></span><input type="search" id="hq" placeholder="Search history" style="max-width:260px"></div><div id="hist"></div></div></section>
+
+<section class="page" id="p-dash"><div class="stats" id="dstats"></div><div class="two"><div class="card"><h3>By language</h3><div id="dlang"></div></div><div class="card"><h3>Recent analyses</h3><div id="drec"></div></div></div></section>
+
+<section class="page" id="p-admin"><div class="stats" id="astats"></div><div class="card"><h3>Analyses per day</h3><div class="chart" id="achart" style="margin-bottom:24px"></div></div><div class="card"><h3>Users</h3><div id="atab" style="overflow:auto"></div></div></section>
+</main>
+
+<div class="modal" id="auth"><div class="card"><h3 id="aT">Log in</h3><div class="err" id="aE"></div><input type="text" id="aU" placeholder="Username (try admin)" aria-label="Username"><input type="password" id="aP" placeholder="Password" aria-label="Password"><button class="btn" style="width:100%" id="aOk">Log in</button><p style="text-align:center;margin:10px 0 0"><a href="#" id="aSw" style="color:var(--pr)">Create an account</a> · <a href="#" id="aX" style="color:var(--mu)">Cancel</a></p></div></div>
+
+
+<script src="js/util.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body></html>

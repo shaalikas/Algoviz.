@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>AlgoViz | See how your codebase fits together</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Paste a GitHub URL or upload a ZIP and get an architecture diagram, file tree, risk report and plain-language summary.">
+<link rel="icon" href="assets/favicon.svg"><link rel="stylesheet" href="css/app.css"><link rel="stylesheet" href="css/landing.css"></head>
+<body>
+<div class="wrap">
+ <div class="top"><a class="logo" href="index.html"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#2563eb" stroke-width="2.5"><circle cx="17" cy="7" r="4"/><circle cx="7" cy="26" r="4"/><circle cx="27" cy="26" r="4"/><path d="M15 10l-6 13M19 10l6 13M11 26h12"/></svg><div><h1>AlgoViz</h1></div></a>
+  <nav><a href="#features">Features</a><a href="#how">How it works</a><a href="#samples">Samples</a><button class="ic" id="theme" aria-label="Toggle theme">◐</button><a class="btn" href="app.html" style="color:#fff">Open the app</a></nav></div>
+ <div class="hero"><div>
+  <h2>See how your codebase fits together.</h2>
+  <p>Paste a GitHub URL or drop in a ZIP. AlgoViz maps the modules, shows what depends on what, flags risky spots and explains the result in plain language.</p>
+  <div class="cta"><a class="btn" href="app.html">Analyze a repository</a><a class="btn sec" href="app.html?sample=axios">Try the axios demo</a></div>
+  <p style="font-size:13px;margin:14px 0 0">No account needed for the demo. Sign up to keep your history.</p></div>
+  <div class="prev" aria-hidden="true"><svg viewBox="0 0 520 300"><path d="M118 150H200M300 135L350 70H395M300 150H395M300 165L350 230H395"/><g stroke-width="1.5"><rect x="20" y="128" width="98" height="44" rx="7" fill="#dbe7ff" stroke="#2563eb"/><rect x="200" y="128" width="100" height="44" rx="7" fill="#e5ddff" stroke="#7c4dff"/><rect x="395" y="48" width="105" height="44" rx="7" fill="#d8f5d0" stroke="#3a9d2c"/><rect x="395" y="128" width="105" height="44" rx="7" fill="#fff3c4" stroke="#c99a00"/><rect x="395" y="208" width="105" height="44" rx="7" fill="#e5ddff" stroke="#7c4dff"/></g><text x="69" y="155" text-anchor="middle">Client</text><text x="250" y="155" text-anchor="middle">index.js</text><text x="447" y="75" text-anchor="middle">lib/core</text><text x="447" y="155" text-anchor="middle">lib/adapters</text><text x="447" y="235" text-anchor="middle">lib/utils</text></svg></div></div>
+</div>
+<section class="blk" id="features"><div class="wrap"><h3>What you get from one analysis</h3><p>Every result is available as a tab, so you read only what you need.</p>
+ <div class="fg">
+  <div class="card"><h4>Architecture diagram</h4><p>Mermaid graph with a top-down or left-right layout. Download it as SVG or a .mmd file.</p></div>
+  <div class="card"><h4>File tree</h4><p>Collapsible tree with a layer badge on each file. Copy it as text for docs.</p></div>
+  <div class="card"><h4>Insights</h4><p>Hotspots with the most dependencies, dependency cycles and file counts per layer.</p></div>
+  <div class="card"><h4>Risk report</h4><p>Hardcoded secrets, outdated packages and oversized functions, ranked High to Info.</p></div>
+  <div class="card"><h4>AI summary</h4><p>A short explanation of how the project works and what to fix first.</p></div>
+  <div class="card"><h4>History and dashboard</h4><p>Search past analyses, reopen or delete them, and see totals by language.</p></div>
+ </div></div></section>
+<section class="blk" id="how"><div class="wrap"><h3>How it works</h3><p>Three steps, about a minute.</p>
+ <ol class="steps"><li><b>Add a repository</b><br><span style="color:var(--mu)">Paste a public GitHub URL or upload a ZIP.</span></li><li><b>Choose options</b><br><span style="color:var(--mu)">Include external dependencies, detect risks, generate a summary.</span></li><li><b>Read the results</b><br><span style="color:var(--mu)">Switch between diagram, tree, insights and summary.</span></li></ol></div></section>
+<section class="blk" id="samples"><div class="wrap"><h3>Start with a sample</h3><p>Runs without an account.</p>
+ <div class="smp"><a class="btn sec" href="app.html?sample=axios">axios (JavaScript)</a><a class="btn sec" href="app.html?sample=flask">flask (Python)</a><a class="btn sec" href="app.html?sample=gin">gin (Go)</a></div></div></section>
+<div class="wrap"><footer><span>AlgoViz · Code-to-Diagram Architecture Visualizer</span><span>© <span id="yr"></span> AlgoViz team</span></footer></div>
+<script src="js/landing.js"></script></body></html>

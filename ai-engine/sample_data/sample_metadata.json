@@ -1,0 +1,81 @@
+{
+  "repository": {
+    "name": "AlgoViz Demo Backend",
+    "language": "Python",
+    "description": "Small demonstration API for repository analysis.",
+    "entry_points": [
+      "app.py"
+    ]
+  },
+  "files": [
+    {
+      "path": "app.py",
+      "language": "Python",
+      "imports": [
+        "service.user_service",
+        "flask"
+      ],
+      "classes": [],
+      "functions": [
+        "create_app",
+        "health"
+      ],
+      "role": "application entry point",
+      "entry_point": true
+    },
+    {
+      "path": "service/user_service.py",
+      "language": "Python",
+      "imports": [
+        "repository.user_repository"
+      ],
+      "classes": [
+        "UserService"
+      ],
+      "functions": [
+        "get_user"
+      ],
+      "role": "business/service layer"
+    },
+    {
+      "path": "repository/user_repository.py",
+      "language": "Python",
+      "imports": [
+        "sqlite3"
+      ],
+      "classes": [
+        "UserRepository"
+      ],
+      "functions": [
+        "find_by_id"
+      ],
+      "role": "data access layer"
+    }
+  ],
+  "dependencies": [
+    "flask",
+    "sqlite3"
+  ],
+  "architecture": {
+    "layers": [
+      "API",
+      "Service",
+      "Repository/Data Access"
+    ],
+    "components": [
+      "app.py",
+      "UserService",
+      "UserRepository"
+    ],
+    "data_flow": [
+      "app.py -> UserService -> UserRepository"
+    ]
+  },
+  "detected_risks": [
+    {
+      "type": "tight coupling",
+      "description": "Service layer directly references repository implementation."
+    }
+  ],
+  "circular_dependencies": []
+}
